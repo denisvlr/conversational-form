@@ -384,7 +384,9 @@ namespace cf {
 			// animate input field in
 
 			this.el.setAttribute("tag-type", this._currentTag.type);
-
+            if (this._currentTag.name) {
+                this.el.setAttribute('tag-name', this._currentTag.name);
+            }
 			// replace textarea and visa versa
 			this.checkForCorrectInputTag()
 

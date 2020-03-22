@@ -422,6 +422,7 @@ namespace cf {
 			this.image = options.image;
 			this.response = this.originalResponse = options.response;
 			this.isRobotResponse = options.isRobotResponse;
+			this._tag = options.tag;
 			
 			super.setData(options);
 		}
@@ -459,7 +460,7 @@ namespace cf {
 		}
 		// template, can be overwritten ...
 		public getTemplate () : string {
-			return `<cf-chat-response class="` + (this.isRobotResponse ? "robot" : "user") + `">
+			return `<cf-chat-response tag-name="` + (this._tag ? this._tag.name : '') + `" class="` + (this.isRobotResponse ? "robot" : "user") + `">
 				<thumb><span></span></thumb>
 				<text></text>
 			</cf-chat-response>`;

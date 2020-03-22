@@ -3183,7 +3183,7 @@ var cf;
         // override
         OptionButton.prototype.getTemplate = function () {
             // be aware that first option element on none multiple select tags will be selected by default
-            var tmpl = '<cf-button class="cf-button ' + (this.isMultiChoice ? "cf-checkbox-button" : "") + '" ' + (this.referenceTag.domElement.selected ? "selected='selected'" : "") + '>';
+            var tmpl = '<cf-button class="cf-button ' + (this.isMultiChoice ? "cf-checkbox-button" : "") + '" ' + (this.referenceTag.domElement.selected && false ? "selected='selected'" : "") + '>';
             tmpl += "<div>";
             if (this.isMultiChoice)
                 tmpl += "<cf-checkbox></cf-checkbox>";
@@ -4437,6 +4437,9 @@ var cf;
                 this.submitButton.typing = false;
             // animate input field in
             this.el.setAttribute("tag-type", this._currentTag.type);
+            if (this._currentTag.name) {
+                this.el.setAttribute('tag-name', this._currentTag.name);
+            }
             // replace textarea and visa versa
             this.checkForCorrectInputTag();
             // set input field to type password if the dom input field is that, covering up the input
@@ -5102,6 +5105,7 @@ var cf;
             this.image = options.image;
             this.response = this.originalResponse = options.response;
             this.isRobotResponse = options.isRobotResponse;
+            this._tag = options.tag;
             _super.prototype.setData.call(this, options);
         };
         ChatResponse.prototype.onElementCreated = function () {
@@ -5135,7 +5139,7 @@ var cf;
         };
         // template, can be overwritten ...
         ChatResponse.prototype.getTemplate = function () {
-            return "<cf-chat-response class=\"" + (this.isRobotResponse ? "robot" : "user") + "\">\n\t\t\t\t<thumb><span></span></thumb>\n\t\t\t\t<text></text>\n\t\t\t</cf-chat-response>";
+            return "<cf-chat-response tag-name=\"" + (this._tag ? this._tag.name : '') + "\" class=\"" + (this.isRobotResponse ? "robot" : "user") + "\">\n\t\t\t\t<thumb><span></span></thumb>\n\t\t\t\t<text></text>\n\t\t\t</cf-chat-response>";
         };
         ChatResponse.THINKING_MARKUP = "<p class='show'><thinking><span>.</span><span>.</span><span>.</span></thinking></p>";
         return ChatResponse;

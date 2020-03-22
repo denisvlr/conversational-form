@@ -47,7 +47,7 @@ namespace cf {
 		// override
 		public getTemplate () : string {
 			// be aware that first option element on none multiple select tags will be selected by default
-			let tmpl: string = '<cf-button class="cf-button ' + (this.isMultiChoice ? "cf-checkbox-button" : "") + '" ' + ((<HTMLOptionElement> this.referenceTag.domElement).selected ? "selected='selected'" : "") + '>';
+			let tmpl: string = '<cf-button class="cf-button ' + (this.isMultiChoice ? "cf-checkbox-button" : "") + '" ' + ((<HTMLOptionElement> this.referenceTag.domElement).selected && false ? "selected='selected'" : "") + '>';
 
 			tmpl += "<div>";
 			if(this.isMultiChoice)
